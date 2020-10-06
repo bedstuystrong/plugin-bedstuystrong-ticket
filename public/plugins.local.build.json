@@ -1,8 +1,8 @@
 [
   {
-    "name": "BedstuystrongTicketPlugin",
+    "name": "BedStuyStrongTicketPlugin",
     "version": "0.1.0",
-    "class": "BedstuystrongTicketPlugin",
+    "class": "BedStuyStrongTicketPlugin",
     "requires": [
       {
         "@twilio/flex-ui": "^1"

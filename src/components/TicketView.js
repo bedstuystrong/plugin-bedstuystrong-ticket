@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withTaskContext } from '@twilio/flex-ui';
 
-const apiUrl = 'http://localhost:5000/twilio';
+const apiUrl = 'https://bedstuystrong-automation-a4b75.web.app/twilio';
 
 const mapStateToProps = (state) => ({
   accountSid: state.flex.config.sso.accountSid,
