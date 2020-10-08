@@ -1,5 +1,5 @@
 import React from 'react';
-import { VERSION } from '@twilio/flex-ui';
+import { VERSION, Tab, MessagingCanvas } from '@twilio/flex-ui';
 import { FlexPlugin } from 'flex-plugin';
 
 import reducers, { namespace } from './states';
@@ -24,6 +24,14 @@ export default class BedStuyStrongTicketPlugin extends FlexPlugin {
     this.registerReducers(manager);
 
     flex.CRMContainer.Content.replace(<CustomCRM key="crm" />);
+
+    // flex.TaskCanvasTabs.Content.add((
+    //   <Tab icon="Messaging" label="Chat" key="chat">
+    //     <MessagingCanvas />
+    //   </Tab>
+    // ), {
+    //   if: () => true
+    // })
   }
 
   /**

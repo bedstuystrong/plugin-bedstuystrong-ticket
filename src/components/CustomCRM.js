@@ -2,6 +2,7 @@ import React from 'react';
 import localstorage from 'local-storage';
 import styled from 'react-emotion';
 
+import Frame from './Frame';
 import TicketView from './TicketView';
 
 const StyledTabs = styled('nav')`
@@ -104,7 +105,7 @@ export default class CustomCRM extends React.Component {
             Voter Registration Script
           </TabButton>
           <h1>
-            Bed-Stuy Strong 💕
+            Bed-Stuy Strong <span role="img" aria-label="heart emojis">💕</span>
           </h1>
         </StyledTabs>
         
@@ -112,10 +113,7 @@ export default class CustomCRM extends React.Component {
           <TicketView />
         </TabPanel>
         <TabPanel name="voterRegistration" selected={tab === 'voterRegistration'}>
-          <article>
-            <h2>voter registration scripts and resources</h2>
-            <p>content</p>
-          </article>
+          <Frame src="https://docs.google.com/document/d/e/2PACX-1vS60-ZafmId2X6353gRb0gfF9EUu7uRhl4B7Y6orOg5nLDfNsr0iPh1q5P8JSujTmKUxJnd3yCrSeUC/pub?embedded=true#h.79w61356abp2" />
         </TabPanel>
       </div>
     );

@@ -1,4 +1,7 @@
+# Flex related ignore
+appConfig.js
 build/
+
 
 # Logs
 logs
