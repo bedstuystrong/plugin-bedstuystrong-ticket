@@ -3,7 +3,7 @@ import localstorage from 'local-storage';
 import styled from 'react-emotion';
 
 import Frame from './Frame';
-import TicketView from './TicketView';
+import TicketView from './TicketList';
 
 const StyledTabs = styled('nav')`
   position: relative;

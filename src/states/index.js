@@ -1,7 +1,7 @@
 import { makeQueryString } from '../utils';
 
 // Register your redux store under a unique namespace
-export const namespace = 'bedstuystrong-ticket';
+export const namespace = 'bedstuystrongTicket';
 
 const API_BASE = 'http://localhost:5001/bedstuystrong-automation-a4b75/us-central1';
 
@@ -46,7 +46,6 @@ export default function reduce(state = initialState, action) {
     // Describe how to handle the Promise if it's successfully fulfilled
     case `${ACTION_GET_TICKETS_FOR_PHONE_NUMBER}_FULFILLED`:
       const tickets = Object.fromEntries(action.payload.map((ticket) => [ticket.ticketID, ticket]));
-      console.log({tickets})
       return {
         ...state,
         isLoading: false,
