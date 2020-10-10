@@ -11,62 +11,23 @@ const TicketListContainer = styled('div')`
 `;
 
 const mapStateToProps = (state) => ({
-  accountSid: state.flex.config.sso.accountSid,
   tickets: state[namespace].tickets,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getTickets: (phoneNumber, accountSid) => dispatch(Actions.getTickets(phoneNumber, accountSid)),
-});
+const TicketView = ({ task, tickets }) => {
+  if (!task) return null;
 
-class TicketView extends React.Component {
-  constructor(props) {
-    super(props);
+  const filteredTickets = Object.values(tickets).filter((ticket) => (
+    ticket.phoneNumber === task.attributes.name
+  )).sort((a, b) => new Date(a.dateCreated) - new Date(b.dateCreated));
 
-    this.getTickets = this.getTickets.bind(this);
-  }
+  return (
+    <TicketListContainer>
+      {filteredTickets.map(ticket => (
+        <Ticket id={ticket.ticketID} key={ticket.ticketID} />
+      ))}
+    </TicketListContainer>
+  );
+}
 
-  UNSAFE_componentWillMount() {
-    const { task } = this.props;
-    if (task) {
-      this.getTickets(task.attributes.name)
-    }
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const { task } = this.props;
-
-    if (!nextProps.task) {
-      return;
-    }
-
-    if (!task || task.sid !== nextProps.task.sid) {
-      this.getTickets(nextProps.task.attributes.name);
-    }
-  }
-
-  getTickets(phoneNumber) {
-    const { accountSid } = this.props;
-    this.props.getTickets(phoneNumber, accountSid);
-  }
-
-  render() {
-    const { task, tickets } = this.props;
-
-    if (!task) return null;
-
-    const filteredTickets = Object.values(tickets).filter((ticket) => (
-      ticket.phoneNumber === task.attributes.name
-    )).sort((a, b) => new Date(a.dateCreated) - new Date(b.dateCreated));
-
-    return (
-      <TicketListContainer>
-        {filteredTickets.map(ticket => (
-          <Ticket id={ticket.ticketID} key={ticket.ticketID} />
-        ))}
-      </TicketListContainer>
-    );
-  }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withTaskContext(TicketView));
+export default connect(mapStateToProps)(withTaskContext(TicketView));

@@ -2,7 +2,7 @@ import React from 'react';
 import { VERSION, Tab, MessagingCanvas } from '@twilio/flex-ui';
 import { FlexPlugin } from 'flex-plugin';
 
-import reducers, { namespace } from './states';
+import reducers, { namespace, Actions } from './states';
 import CustomCRM from './components/CustomCRM';
 
 const PLUGIN_NAME = 'BedStuyStrongTicketPlugin';
@@ -25,13 +25,12 @@ export default class BedStuyStrongTicketPlugin extends FlexPlugin {
 
     flex.CRMContainer.Content.replace(<CustomCRM key="crm" />);
 
-    // flex.TaskCanvasTabs.Content.add((
-    //   <Tab icon="Messaging" label="Chat" key="chat">
-    //     <MessagingCanvas />
-    //   </Tab>
-    // ), {
-    //   if: () => true
-    // })
+    flex.Actions.addListener('afterSelectTask', (payload) => {
+      manager.store.dispatch(Actions.getTickets(
+        payload.task.attributes.name,
+        manager.store.getState().flex.config.sso.accountSid
+      ));
+    });
   }
 
   /**
