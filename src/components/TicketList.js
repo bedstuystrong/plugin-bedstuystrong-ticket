@@ -19,7 +19,7 @@ const TicketView = ({ task, tickets }) => {
 
   const filteredTickets = Object.values(tickets).filter((ticket) => (
     ticket.phoneNumber === task.attributes.name
-  )).sort((a, b) => new Date(a.dateCreated) - new Date(b.dateCreated));
+  )).sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated));
 
   return (
     <TicketListContainer>
