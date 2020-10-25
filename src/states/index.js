@@ -3,7 +3,9 @@ import { makeQueryString } from '../utils';
 // Register your redux store under a unique namespace
 export const namespace = 'bedstuystrongTicket';
 
-const API_BASE = 'https://us-central1-bedstuystrong-automation.cloudfunctions.net/';
+const API_BASE = process.env.NODE_ENV === 'production' ?
+  'https://us-central1-bedstuystrong-automation.cloudfunctions.net' :
+  'https://us-central1-bedstuystrong-automation-a4b75.cloudfunctions.net';
 
 const ACTION_GET_TICKETS_FOR_PHONE_NUMBER = 'GET_TICKETS_FOR_PHONE_NUMBER';
 

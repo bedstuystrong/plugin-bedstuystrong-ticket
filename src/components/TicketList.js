@@ -8,6 +8,7 @@ import Ticket from './Ticket';
 
 const TicketListContainer = styled('div')`
   background-color: #f5f5f5;
+  flex: 1;
 `;
 
 const mapStateToProps = (state) => ({

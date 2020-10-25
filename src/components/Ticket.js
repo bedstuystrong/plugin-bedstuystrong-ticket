@@ -46,6 +46,7 @@ const TicketContainer = styled('div')`
   padding: 1rem;
   display: flex;
   flex-wrap: wrap;
+  max-width: 24rem;
   position: relative;
   font-size: 1rem;
 
@@ -103,7 +104,7 @@ const TicketContainer = styled('div')`
   }
 `;
 
-const tableID = 'tbljexnPd5eBpLilw';
+const tableID = process.env.NODE_ENV === 'production' ? 'tblW68BhT6VLe2cJf' : 'tbljexnPd5eBpLilw';
 
 const Ticket = ({ ticket }) => {
   const {
