@@ -30,7 +30,7 @@ const statuses = {
     backgroundColor: '#ccc',
     color: '#040404',
   },
-}
+};
 
 const mapStateToProps = (state, ownProps) => ({
   ticket: state[namespace].tickets[ownProps.id],
