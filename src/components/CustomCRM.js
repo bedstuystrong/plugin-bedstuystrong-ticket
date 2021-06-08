@@ -76,7 +76,11 @@ export default class CustomCRM extends React.Component {
   constructor(props) {
     super(props);
 
-    const initialTab = localstorage.get('lastViewedTab');
+    let initialTab = localstorage.get('lastViewedTab');
+
+    if (initialTab && !['tickets', 'pause', 'vaccines'].includes(initialTab)) {
+      initialTab = 'tickets';
+    }
 
     this.state = {
       tab: initialTab || 'tickets',
@@ -101,8 +105,11 @@ export default class CustomCRM extends React.Component {
           <TabButton name="tickets" selected={tab === 'tickets'} onClick={this.handleClick}>
             Intake Tickets
           </TabButton>
-          <TabButton name="inbound" selected={tab === 'inbound'} onClick={this.handleClick}>
-            Inbound Reopening
+          <TabButton name="pause" selected={tab === 'pause'} onClick={this.handleClick}>
+            Food ops pause
+          </TabButton>
+          <TabButton name="vaccines" selected={tab === 'vaccines'} onClick={this.handleClick}>
+            Vaccines
           </TabButton>
           <h1>
             Bed-Stuy Strong <span role="img" aria-label="heart emojis">💕</span>
@@ -112,8 +119,11 @@ export default class CustomCRM extends React.Component {
         <TabPanel name="tickets" selected={tab === 'tickets'}>
           <TicketView />
         </TabPanel>
-        <TabPanel name="inbound" selected={tab === 'inbound'}>
-          <Frame src="https://docs.google.com/document/d/e/2PACX-1vSx8keK5ZzgbCZzENmWWEX4GtHwSLwVO1uYGes_FPnsYSCECtbsradNgbdl-bJOPKphmzLdFwPnjqfx/pub?embedded=true" />
+        <TabPanel name="pause" selected={tab === 'pause'}>
+          <Frame src="https://docs.google.com/document/d/e/2PACX-1vR8e_jWLutvc3V1mn8wIvvWYHwhDo4mdpHJ76p16ubJrW3wU6R4e8qS3Cp7yPZS1TfizKbo-3hBIHk_/pub?embedded=true" />
+        </TabPanel>
+        <TabPanel name="vaccines" selected={tab === 'vaccines'}>
+          <Frame src="https://docs.google.com/document/d/e/2PACX-1vTtBw-v28DR9T_nNLzyM8W2Vc70ImAQPsXlx5vz2DRkY8rWG89zj7Laqr18VyNcDaLOG9JPa4dRb-bN/pub?embedded=true" />
         </TabPanel>
       </div>
     );
