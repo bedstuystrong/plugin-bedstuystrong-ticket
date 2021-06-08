@@ -5,6 +5,19 @@ import styled from 'react-emotion';
 import Frame from './Frame';
 import TicketView from './TicketList';
 
+const DOCUMENT_TABS = {
+  pause: {
+    label: 'Food ops pause',
+    url: 'https://docs.google.com/document/d/e/2PACX-1vR8e_jWLutvc3V1mn8wIvvWYHwhDo4mdpHJ76p16ubJrW3wU6R4e8qS3Cp7yPZS1TfizKbo-3hBIHk_/pub?embedded=true',
+  },
+  vaccines: {
+    label: 'Vaccines',
+    url: 'https://docs.google.com/document/d/e/2PACX-1vTtBw-v28DR9T_nNLzyM8W2Vc70ImAQPsXlx5vz2DRkY8rWG89zj7Laqr18VyNcDaLOG9JPa4dRb-bN/pub?embedded=true',
+  },
+};
+
+const tabNames = ['tickets', ...Object.keys(DOCUMENT_TABS)];
+
 const StyledTabs = styled('nav')`
   position: relative;
   display: flex;
@@ -77,8 +90,9 @@ export default class CustomCRM extends React.Component {
     super(props);
 
     let initialTab = localstorage.get('lastViewedTab');
+    
 
-    if (initialTab && !['tickets', 'pause', 'vaccines'].includes(initialTab)) {
+    if (initialTab && !tabNames.includes(initialTab)) {
       initialTab = 'tickets';
     }
 
@@ -105,12 +119,14 @@ export default class CustomCRM extends React.Component {
           <TabButton name="tickets" selected={tab === 'tickets'} onClick={this.handleClick}>
             Intake Tickets
           </TabButton>
-          <TabButton name="pause" selected={tab === 'pause'} onClick={this.handleClick}>
-            Food ops pause
-          </TabButton>
-          <TabButton name="vaccines" selected={tab === 'vaccines'} onClick={this.handleClick}>
-            Vaccines
-          </TabButton>
+          {Object.keys(DOCUMENT_TABS).map((key) => {
+            const value = DOCUMENT_TABS[key];
+            return (
+              <TabButton name={key} selected={tab === key} onClick={this.handleClick} key={key}>
+                {value.label}
+              </TabButton>
+            );
+          })}
           <h1>
             Bed-Stuy Strong <span role="img" aria-label="heart emojis">💕</span>
           </h1>
@@ -119,12 +135,14 @@ export default class CustomCRM extends React.Component {
         <TabPanel name="tickets" selected={tab === 'tickets'}>
           <TicketView />
         </TabPanel>
-        <TabPanel name="pause" selected={tab === 'pause'}>
-          <Frame src="https://docs.google.com/document/d/e/2PACX-1vR8e_jWLutvc3V1mn8wIvvWYHwhDo4mdpHJ76p16ubJrW3wU6R4e8qS3Cp7yPZS1TfizKbo-3hBIHk_/pub?embedded=true" />
-        </TabPanel>
-        <TabPanel name="vaccines" selected={tab === 'vaccines'}>
-          <Frame src="https://docs.google.com/document/d/e/2PACX-1vTtBw-v28DR9T_nNLzyM8W2Vc70ImAQPsXlx5vz2DRkY8rWG89zj7Laqr18VyNcDaLOG9JPa4dRb-bN/pub?embedded=true" />
-        </TabPanel>
+        {Object.keys(DOCUMENT_TABS).map((key) => {
+          const value = DOCUMENT_TABS[key];
+          return (
+            <TabPanel name={key} selected={tab === key} key={key}>
+              <Frame src={value.url} />
+            </TabPanel>
+          );
+        })}
       </div>
     );
   }
